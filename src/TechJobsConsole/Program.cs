@@ -116,18 +116,30 @@ namespace TechJobsConsole
             return choiceKeys[choiceIdx];
         }
 
+        // add in section to print jobs for certain search criteria
+        // searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
+        // PrintJobs(searchResults);
+
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            foreach(Dictionary<string,string> column in someJobs)
+            int jobs = someJobs.Count;
+            if (jobs == 0)
             {
-                Console.WriteLine("\n*****");
-                foreach(KeyValuePair<string, string> row in column)
+                Console.WriteLine("No jobs found");
+            }
+            else
+            {
+                foreach (Dictionary<string, string> column in someJobs)
                 {
-                    if (row.Key != "")
-                        Console.WriteLine(row.Key + ": " + row.Value);
+                    Console.WriteLine("\n*****");
+                    foreach (KeyValuePair<string, string> row in column)
+                    {
+                        if (row.Key != "")
+                            Console.WriteLine(row.Key + ": " + row.Value);
+                    }
+                    Console.WriteLine("*****\n");
                 }
-                Console.WriteLine("*****\n");
-            }  
+            }
         }
     }
 }
