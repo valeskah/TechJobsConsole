@@ -40,18 +40,19 @@ namespace TechJobsConsole
 
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
+            //parameter = (columnChoice, searchTerm)
             // load data, if not already loaded
             LoadData();
 
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
-            foreach (Dictionary<string, string> row in AllJobs)
+            foreach (Dictionary<string, string> listing in AllJobs)
             {
-                string aValue = row[column];
+                string aValue = listing[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
-                    jobs.Add(row);
+                    jobs.Add(listing);
                 }
             }
 
@@ -144,16 +145,16 @@ namespace TechJobsConsole
             LoadData();
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
 
-            foreach(Dictionary<string, string> column in AllJobs)
+            foreach(Dictionary<string, string> listing in AllJobs)
             {
-                foreach(KeyValuePair<string,string> row in column)
+                foreach(KeyValuePair<string,string> row in listing)
                 {
                     
-                    if (row.Value.Contains(searchTerm))
+                    if (row.Value.ToLower().Contains(searchTerm.ToLower()))
                     {
-                        if (!jobs.Contains(column))
+                        if (!jobs.Contains(listing))
                         {
-                            jobs.Add(column);
+                            jobs.Add(listing);
                         }
                     }
                 }
